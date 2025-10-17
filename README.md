@@ -1,42 +1,35 @@
 # MockingBird 
 
-A powerful C# library to mock data for any object or record. 
+A powerful C# library to mock data for any object or record.  
 
-# Getting Started
+# Getting Started  
+
 ## 1. Add A Reference to MockingBird
 
 ## 2. Add Using Statement
 
 ```
-
 using MockingBird;
-
 ```
 
 ## 3. Define a MockingBird Object (MBObject) and Add Properties
 
 ```
-
 MBObject obj = new MBObject();
 obj.AddProperty(new MBStringProperty("Id").SetFormat(MBStringFormat.Guid));
 obj.AddProperty(new MBStringProperty("FirstName").SetFormat(MBStringFormat.FirstName));
 obj.AddProperty(new MBStringProperty("LastName").SetFormat(MBStringFormat.LastName));
 obj.AddProperty(new MBDateTimeProperty("DateOfBirth"));
 obj.AddProperty(new MBStringProperty("Email").SetFormat(MBStringFormat.Email));
-
 ```
 
 ## 4. Call the MBObject's Mock() Method w/ How many records you want
 
 ```
-
 var sampleRecords = obj.Mock(numberOfRecords);
-
 ```
 
-# Supported Property Types
-
-  
+# Supported Property Types  
 
 ## Number (MBNumberProperty)
 

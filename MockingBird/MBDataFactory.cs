@@ -50,7 +50,7 @@ namespace MockingBird
                                 dict[boolProperty.Name] = BooleanHelper.GetRandomBool(boolProperty);
                             }
                             break;
-                        case MBDateTime dateTimeProperty:
+                        case MBDateTimeProperty dateTimeProperty:
                             if (dateTimeProperty.IsList)
                             {
                                 dict[dateTimeProperty.Name] = DateHelper.GetRandomDateTimeList(dateTimeProperty);
