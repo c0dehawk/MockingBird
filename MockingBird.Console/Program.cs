@@ -158,26 +158,26 @@ static void RunDateTest()
 
     //Object
     MBObject obj = new MBObject();
-    obj.AddProperty(new MBDateTime("Date"));
-    obj.AddProperty(new MBDateTime("DateList", true));
-    obj.AddProperty(new MBDateTime("Date_FullDateTime").SetFormat(MBDateTimeFormat.FullDateTime));
-    obj.AddProperty(new MBDateTime("Date_FullDateTime_List", true).SetFormat(MBDateTimeFormat.FullDateTime));
-    obj.AddProperty(new MBDateTime("Date_MonthDay").SetFormat(MBDateTimeFormat.MonthDay));
-    obj.AddProperty(new MBDateTime("Date_MonthDay_List", true).SetFormat(MBDateTimeFormat.MonthDay));
-    obj.AddProperty(new MBDateTime("Date_ShortDate").SetFormat(MBDateTimeFormat.ShortDate));
-    obj.AddProperty(new MBDateTime("Date_ShortDate_List", true).SetFormat(MBDateTimeFormat.ShortDate));
-    obj.AddProperty(new MBDateTime("Date_LongDate").SetFormat(MBDateTimeFormat.LongDate));
-    obj.AddProperty(new MBDateTime("Date_LongDate_List", true).SetFormat(MBDateTimeFormat.LongDate));
-    obj.AddProperty(new MBDateTime("Date_RFC1123").SetFormat(MBDateTimeFormat.RFC1123));
-    obj.AddProperty(new MBDateTime("Date_RFC1123_List", true).SetFormat(MBDateTimeFormat.RFC1123));
-    obj.AddProperty(new MBDateTime("Date_SortableDateTime").SetFormat(MBDateTimeFormat.SortableDateTime));
-    obj.AddProperty(new MBDateTime("Date_SortableDateTime_List", true).SetFormat(MBDateTimeFormat.SortableDateTime));
-    obj.AddProperty(new MBDateTime("Date_UniversalSortableDateTime").SetFormat(MBDateTimeFormat.UniversalSortableDateTime));
-    obj.AddProperty(new MBDateTime("Date_UniversalSortableDateTime_List", true).SetFormat(MBDateTimeFormat.UniversalSortableDateTime));
-    obj.AddProperty(new MBDateTime("Date_CustomRange").SetMinValue(DateTime.Now.AddYears(-1)).SetMaxValue(DateTime.Now).SetFormat(MBDateTimeFormat.ShortDate));
-    obj.AddProperty(new MBDateTime("Date_CustomRange_List", true).SetMinValue(DateTime.Now.AddYears(-1)).SetMaxValue(DateTime.Now).SetFormat(MBDateTimeFormat.ShortDate));
-    obj.AddProperty(new MBDateTime("Date_CustomStringFormat").SetFormat(MBDateTimeFormat.CustomStringFormat).SetCustomFormatString("yyyy-MM-dd HH:mm:ss"));
-    obj.AddProperty(new MBDateTime("Date_CustomStringFormat_List", true).SetFormat(MBDateTimeFormat.CustomStringFormat).SetCustomFormatString("yyyy-MM-dd HH:mm:ss"));
+    obj.AddProperty(new MBDateTimeProperty("Date"));
+    obj.AddProperty(new MBDateTimeProperty("DateList", true));
+    obj.AddProperty(new MBDateTimeProperty("Date_FullDateTime").SetFormat(MBDateTimeFormat.FullDateTime));
+    obj.AddProperty(new MBDateTimeProperty("Date_FullDateTime_List", true).SetFormat(MBDateTimeFormat.FullDateTime));
+    obj.AddProperty(new MBDateTimeProperty("Date_MonthDay").SetFormat(MBDateTimeFormat.MonthDay));
+    obj.AddProperty(new MBDateTimeProperty("Date_MonthDay_List", true).SetFormat(MBDateTimeFormat.MonthDay));
+    obj.AddProperty(new MBDateTimeProperty("Date_ShortDate").SetFormat(MBDateTimeFormat.ShortDate));
+    obj.AddProperty(new MBDateTimeProperty("Date_ShortDate_List", true).SetFormat(MBDateTimeFormat.ShortDate));
+    obj.AddProperty(new MBDateTimeProperty("Date_LongDate").SetFormat(MBDateTimeFormat.LongDate));
+    obj.AddProperty(new MBDateTimeProperty("Date_LongDate_List", true).SetFormat(MBDateTimeFormat.LongDate));
+    obj.AddProperty(new MBDateTimeProperty("Date_RFC1123").SetFormat(MBDateTimeFormat.RFC1123));
+    obj.AddProperty(new MBDateTimeProperty("Date_RFC1123_List", true).SetFormat(MBDateTimeFormat.RFC1123));
+    obj.AddProperty(new MBDateTimeProperty("Date_SortableDateTime").SetFormat(MBDateTimeFormat.SortableDateTime));
+    obj.AddProperty(new MBDateTimeProperty("Date_SortableDateTime_List", true).SetFormat(MBDateTimeFormat.SortableDateTime));
+    obj.AddProperty(new MBDateTimeProperty("Date_UniversalSortableDateTime").SetFormat(MBDateTimeFormat.UniversalSortableDateTime));
+    obj.AddProperty(new MBDateTimeProperty("Date_UniversalSortableDateTime_List", true).SetFormat(MBDateTimeFormat.UniversalSortableDateTime));
+    obj.AddProperty(new MBDateTimeProperty("Date_CustomRange").SetMinValue(DateTime.Now.AddYears(-1)).SetMaxValue(DateTime.Now).SetFormat(MBDateTimeFormat.ShortDate));
+    obj.AddProperty(new MBDateTimeProperty("Date_CustomRange_List", true).SetMinValue(DateTime.Now.AddYears(-1)).SetMaxValue(DateTime.Now).SetFormat(MBDateTimeFormat.ShortDate));
+    obj.AddProperty(new MBDateTimeProperty("Date_CustomStringFormat").SetFormat(MBDateTimeFormat.CustomStringFormat).SetCustomFormatString("yyyy-MM-dd HH:mm:ss"));
+    obj.AddProperty(new MBDateTimeProperty("Date_CustomStringFormat_List", true).SetFormat(MBDateTimeFormat.CustomStringFormat).SetCustomFormatString("yyyy-MM-dd HH:mm:ss"));
 
 
     var sampleRecords = obj.Mock(numberOfRecords);
@@ -195,23 +195,24 @@ static void RunObjectsTest()
     //Define Sub Object
     MBObject subObj = new MBObject();
     subObj.AddProperty(new MBNumberProperty("Int"));
-    subObj.AddProperty(new MBStringProperty("String"));
+    subObj.AddProperty(new MBStringProperty("Name"));
     subObj.AddProperty(new MBBooleanProperty("Bool"));
-    subObj.AddProperty(new MBDateTime("Date").SetFormat(MBDateTimeFormat.ShortDate));
+    subObj.AddProperty(new MBDateTimeProperty("Date").SetFormat(MBDateTimeFormat.ShortDate));
     subObj.AddProperty(new MBStringProperty("String_Email").SetFormat(MBStringFormat.Email));
     subObj.AddProperty(new MBStringProperty("String_FullName").SetFormat(MBStringFormat.FullName));
 
+//Define Main Object
     MBObject obj = new MBObject();
     obj.AddProperty(new MBNumberProperty("Int"));
     obj.AddProperty(new MBStringProperty("String"));
     obj.AddProperty(new MBBooleanProperty("Bool"));
-    obj.AddProperty(new MBDateTime("Date"));
+    obj.AddProperty(new MBDateTimeProperty("Date"));
     obj.AddProperty(new MBStringProperty("String_Email").SetFormat(MBStringFormat.Email));
     obj.AddProperty(new MBStringProperty("String_FullName").SetFormat(MBStringFormat.FullName));
-    obj.AddProperty(new MBObjectProperty("SubObject", subObj));
-    obj.AddProperty(new MBObjectProperty("SubObjectList", subObj, true));
+    obj.AddProperty(new MBObjectProperty("SubObject", subObj)); //Single Sub Object
+    obj.AddProperty(new MBObjectProperty("SubObjectList", subObj, true)); //Sub Object List
 
-    var sampleRecords = obj.Mock(numberOfRecords);
+    var sampleRecords = obj.Mock(numberOfRecords); //Main Object Mock();
 
     Console.Write(JsonConvert.SerializeObject(sampleRecords, Formatting.Indented));
 }
@@ -228,7 +229,7 @@ static void RunPersonCastTest()
     obj.AddProperty(new MBStringProperty("Id").SetFormat(MBStringFormat.Guid));
     obj.AddProperty(new MBStringProperty("FirstName").SetFormat(MBStringFormat.FirstName));
     obj.AddProperty(new MBStringProperty("LastName").SetFormat(MBStringFormat.LastName));
-    obj.AddProperty(new MBDateTime("DateOfBirth"));
+    obj.AddProperty(new MBDateTimeProperty("DateOfBirth"));
     obj.AddProperty(new MBStringProperty("Email").SetFormat(MBStringFormat.Email));
 
     var sampleRecords = obj.Mock(numberOfRecords);

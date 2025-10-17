@@ -4,7 +4,7 @@
     {
         private static readonly Random _random = new Random();
 
-        internal static object GetRandomDateTime(MBDateTime property)
+        internal static object GetRandomDateTime(MBDateTimeProperty property)
         {
 
             var randomDate = GetDateTime(property);
@@ -44,7 +44,7 @@
             }
         }
 
-        internal static List<object> GetRandomDateTimeList(MBDateTime property)
+        internal static List<object> GetRandomDateTimeList(MBDateTimeProperty property)
         {
             var list = new List<object>();
             var count = _random.Next(2, 10);
@@ -55,7 +55,7 @@
             return list;
         }
 
-        internal static DateTime GetDateTime(MBDateTime property)
+        internal static DateTime GetDateTime(MBDateTimeProperty property)
         {
             DateTime start = property.MinValue;
             DateTime end = property.MaxValue;
