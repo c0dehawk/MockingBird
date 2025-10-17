@@ -2,8 +2,6 @@
 
 A powerful C# library to mock data for any object or record.  
 
-This project was created originally at BuildIT 2025 by Jason Thomas  
-
 # Getting Started  
 
 ## 1. Add A Reference to MockingBird
