@@ -29,7 +29,7 @@ obj.AddProperty(new MBStringProperty("Email").SetFormat(MBStringFormat.Email));
 var sampleRecords = obj.Mock(numberOfRecords);
 ```
 
-# Supported Property Types  
+# Supported Property Types  
 
 ## Number (MBNumberProperty)
 
