@@ -14,6 +14,7 @@ while (true)
     Console.WriteLine("4. Run DateTime Test");
     Console.WriteLine("5. Run Objects Test");
     Console.WriteLine("6. Run Casting Test");
+    Console.WriteLine("7. Repeat Sub Object Test with Overrides");
     Console.WriteLine("10. Exit");
     Console.Write("Select an option: ");
 
@@ -38,6 +39,9 @@ while (true)
             break;
         case "6":
             RunPersonCastTest();
+            break;
+        case "7":
+            RunSubObjectWithOverridesTest();
             break;
         case "10":
             Console.WriteLine("Exiting application. Goodbye!");
@@ -201,12 +205,12 @@ static void RunObjectsTest()
     subObj.AddProperty(new MBStringProperty("String_Email").SetFormat(MBStringFormat.Email));
     subObj.AddProperty(new MBStringProperty("String_FullName").SetFormat(MBStringFormat.FullName));
 
-//Define Main Object
+    //Define Main Object
     MBObject obj = new MBObject();
-    obj.AddProperty(new MBNumberProperty("Int"));
-    obj.AddProperty(new MBStringProperty("String"));
+    obj.AddProperty(new MBNumberProperty("Int", true).SetOverrideValue(43m));
+    obj.AddProperty(new MBStringProperty("String").SetOverrideValue("Overridden String Value"));
     obj.AddProperty(new MBBooleanProperty("Bool"));
-    obj.AddProperty(new MBDateTimeProperty("Date"));
+    obj.AddProperty(new MBDateTimeProperty("Date").SetOverrideValue(new DateTime(2020, 1, 1)));
     obj.AddProperty(new MBStringProperty("String_Email").SetFormat(MBStringFormat.Email));
     obj.AddProperty(new MBStringProperty("String_FullName").SetFormat(MBStringFormat.FullName));
     obj.AddProperty(new MBObjectProperty("SubObject", subObj)); //Single Sub Object
@@ -234,8 +238,31 @@ static void RunPersonCastTest()
 
     var sampleRecords = obj.Mock(numberOfRecords);
 
-// Cast to Person
+    // Cast to Person
     List<Person> people = JsonConvert.DeserializeObject<List<Person>>(JsonConvert.SerializeObject(sampleRecords)) ?? new List<Person>();
 
     Console.Write(JsonConvert.SerializeObject(people, Formatting.Indented));
+}
+
+static void RunSubObjectWithOverridesTest()
+{
+    Console.Write("How many records do you want to generate? ");
+    var input = Console.ReadLine();
+
+    var numberOfRecords = int.TryParse(input, out int n) ? n : 10;
+
+    //Define Sub Object
+    MBObject subObj = new MBObject();
+    subObj.AddProperty(new MBNumberProperty("Int").SetOverrideValue(99m));
+    subObj.AddProperty(new MBStringProperty("Name").SetOverrideValue("Overridden Sub Name"));
+    subObj.AddProperty(new MBBooleanProperty("Bool").SetTruePercentage(100));
+
+    MBObject obj = new MBObject();
+    obj.AddProperty(new MBStringProperty("Id").SetFormat(MBStringFormat.Guid));
+    obj.AddProperty(new MBObjectProperty("SubObjects", subObj, true));
+
+    var sampleRecords = obj.Mock(numberOfRecords);
+
+    Console.Write(JsonConvert.SerializeObject(sampleRecords, Formatting.Indented));
+
 }

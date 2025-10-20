@@ -239,45 +239,52 @@ namespace MockingBird.Helpers
 
         internal static string GetRandomString(MBStringProperty property)
         {
-            int length = property.Length;
-            switch (property.Format)
+
+            if (property.OverrideValue != string.Empty)
             {
-                case MBStringFormat.None:
-                    return GetUnformattedString(property);
-                case MBStringFormat.Guid:
-                    return Guid.NewGuid().ToString();
-                case MBStringFormat.AddressLine1:
-                    return GetAddress1();
-                case MBStringFormat.AddressLine2:
-                    return GetAddress2();
-                case MBStringFormat.City:
-                    return GetCity();
-                case MBStringFormat.State:
-                    return GetState();
-                case MBStringFormat.Zip:
-                    return GetZipCode();
-                case MBStringFormat.Country:
-                    return GetCountry();
-                case MBStringFormat.FirstName:
-                    return GetFirstName();
-                case MBStringFormat.LastName:
-                    return GetLastName();
-                case MBStringFormat.FullName:
-                    return GetFullName();
-                case MBStringFormat.Email:
-                    return GetEmail(property);
-                case MBStringFormat.Phone:
-                    return GetPhoneNumber();
-                case MBStringFormat.SSN:
-                    return GetSSN();
-                case MBStringFormat.Sex:
-                    return GetSex();
-                case MBStringFormat.JobTitle:
-                    return GetJobTitle();
-                case MBStringFormat.CompanyName:
-                    return GetCompanyName();
-                default:
-                    throw new Exception($"Not a supported String Format for '{property.Name}'");
+                return property.OverrideValue;
+            }
+            else
+            {                
+                switch (property.Format)
+                {
+                    case MBStringFormat.None:
+                        return GetUnformattedString(property);
+                    case MBStringFormat.Guid:
+                        return Guid.NewGuid().ToString();
+                    case MBStringFormat.AddressLine1:
+                        return GetAddress1();
+                    case MBStringFormat.AddressLine2:
+                        return GetAddress2();
+                    case MBStringFormat.City:
+                        return GetCity();
+                    case MBStringFormat.State:
+                        return GetState();
+                    case MBStringFormat.Zip:
+                        return GetZipCode();
+                    case MBStringFormat.Country:
+                        return GetCountry();
+                    case MBStringFormat.FirstName:
+                        return GetFirstName();
+                    case MBStringFormat.LastName:
+                        return GetLastName();
+                    case MBStringFormat.FullName:
+                        return GetFullName();
+                    case MBStringFormat.Email:
+                        return GetEmail(property);
+                    case MBStringFormat.Phone:
+                        return GetPhoneNumber();
+                    case MBStringFormat.SSN:
+                        return GetSSN();
+                    case MBStringFormat.Sex:
+                        return GetSex();
+                    case MBStringFormat.JobTitle:
+                        return GetJobTitle();
+                    case MBStringFormat.CompanyName:
+                        return GetCompanyName();
+                    default:
+                        throw new Exception($"Not a supported String Format for '{property.Name}'");
+                }
             }
         }
 
@@ -398,7 +405,7 @@ namespace MockingBird.Helpers
 
         internal static string GetCountry()
         {
-             int index = _random.Next(Countries.Count);
+            int index = _random.Next(Countries.Count);
             return Countries[index];
         }
 

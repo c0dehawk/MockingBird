@@ -7,40 +7,47 @@
         internal static object GetRandomDateTime(MBDateTimeProperty property)
         {
 
-            var randomDate = GetDateTime(property);
-
-            switch (property.Format)
+            if (property.OverrideValue != null)
             {
-                case MBDateTimeFormat.None:
-                    return randomDate;
-                case MBDateTimeFormat.ShortDate:
-                    return randomDate.ToShortDateString();
-                case MBDateTimeFormat.LongDate:
-                    return randomDate.ToLongDateString();
-                case MBDateTimeFormat.RFC1123:
-                    return randomDate.ToString("R");
-                case MBDateTimeFormat.SortableDateTime:
-                    return randomDate.ToString("s");
-                case MBDateTimeFormat.UniversalSortableDateTime:
-                    return randomDate.ToString("u");
-                case MBDateTimeFormat.FullDateTime:
-                    return randomDate.ToString("F");
-                case MBDateTimeFormat.YearMonth:
-                    return randomDate.ToString("Y");
-                case MBDateTimeFormat.MonthDay:
-                    return randomDate.ToString("M");
-                case MBDateTimeFormat.CustomStringFormat:
-                    try
-                    {
-                        var test = randomDate.ToString(property.CustomFormatString);
-                        return test;
-                    }
-                    catch (Exception)
-                    {
-                        return $"The provided custom date format string is invalid for {property.Name}.";              
-                    }                 
-                default:
-                    throw new Exception($"Date Format not recognized for {property.Name}");
+                return property.OverrideValue;
+            }
+            else
+            {
+                var randomDate = GetDateTime(property);
+
+                switch (property.Format)
+                {
+                    case MBDateTimeFormat.None:
+                        return randomDate;
+                    case MBDateTimeFormat.ShortDate:
+                        return randomDate.ToShortDateString();
+                    case MBDateTimeFormat.LongDate:
+                        return randomDate.ToLongDateString();
+                    case MBDateTimeFormat.RFC1123:
+                        return randomDate.ToString("R");
+                    case MBDateTimeFormat.SortableDateTime:
+                        return randomDate.ToString("s");
+                    case MBDateTimeFormat.UniversalSortableDateTime:
+                        return randomDate.ToString("u");
+                    case MBDateTimeFormat.FullDateTime:
+                        return randomDate.ToString("F");
+                    case MBDateTimeFormat.YearMonth:
+                        return randomDate.ToString("Y");
+                    case MBDateTimeFormat.MonthDay:
+                        return randomDate.ToString("M");
+                    case MBDateTimeFormat.CustomStringFormat:
+                        try
+                        {
+                            var test = randomDate.ToString(property.CustomFormatString);
+                            return test;
+                        }
+                        catch (Exception)
+                        {
+                            return $"The provided custom date format string is invalid for {property.Name}.";
+                        }
+                    default:
+                        throw new Exception($"Date Format not recognized for {property.Name}");
+                }
             }
         }
 

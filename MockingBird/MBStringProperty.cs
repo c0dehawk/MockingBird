@@ -11,6 +11,7 @@ public class MBStringProperty : IMBProperty
     public bool IncludeNumeric { get; private set; } = false;
     public bool IncludeSpaces { get; private set; } = false;
     public MBStringFormat Format { get; private set; } = MBStringFormat.None;
+    public string OverrideValue { get; private set; } = string.Empty;
 
     public MBStringProperty(string name)
     {
@@ -60,6 +61,12 @@ public class MBStringProperty : IMBProperty
     public MBStringProperty SetIncludeSpaces(bool include)
     {
         IncludeSpaces = include;
+        return this;
+    }
+
+    public MBStringProperty SetOverrideValue(string value)
+    {
+        OverrideValue = value;
         return this;
     }
 }

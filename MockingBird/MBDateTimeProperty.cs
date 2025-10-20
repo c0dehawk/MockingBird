@@ -1,48 +1,55 @@
 namespace MockingBird;
 
-public class MBDateTime : IMBProperty
+public class MBDateTimeProperty : IMBProperty
 {
     public string Name { get; private set; }
     public bool IsList { get; private set; }
     public DateTime MinValue { get; private set; } = DateTime.Now.AddYears(-1);
     public DateTime MaxValue { get; private set; } = DateTime.Now;
     public string CustomFormatString { get; private set; } = string.Empty;
+    public object OverrideValue { get; private set; } = null;
 
  public MBDateTimeFormat Format { get; private set; } = MBDateTimeFormat.None;
 
-    public MBDateTime(string name)
+    public MBDateTimeProperty(string name)
     {
         Name = name;
         IsList = false;
     }
 
-    public MBDateTime(string name, bool isList)
+    public MBDateTimeProperty(string name, bool isList)
     {
         Name = name;
         IsList = isList;
     }
 
-    public MBDateTime SetMinValue(DateTime minValue)
+    public MBDateTimeProperty SetMinValue(DateTime minValue)
     {
         MinValue = minValue;
         return this;
     }
 
-    public MBDateTime SetMaxValue(DateTime maxValue)
+    public MBDateTimeProperty SetMaxValue(DateTime maxValue)
     {
         MaxValue = maxValue;
         return this;
     }
 
-    public MBDateTime SetFormat(MBDateTimeFormat format)
+    public MBDateTimeProperty SetFormat(MBDateTimeFormat format)
     {
         Format = format;
         return this;
     }
 
-    public MBDateTime SetCustomFormatString(string customFormat)
+    public MBDateTimeProperty SetCustomFormatString(string customFormat)
     {
         CustomFormatString = customFormat;
+        return this;
+    }
+
+    public MBDateTimeProperty SetOverrideValue(object value)
+    {
+        OverrideValue = value;
         return this;
     }
 }

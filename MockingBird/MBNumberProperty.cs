@@ -8,6 +8,7 @@ public class MBNumberProperty : IMBProperty
     public int MaxValue { get; private set; } = 1000;
     public MBNumberFormat Format { get; private set; } = MBNumberFormat.Integer;
     public int DecimalPlaces { get; private set; } = 2;
+    public object OverrideValue { get; private set; } = null;
 
     public MBNumberProperty(string name)
     {
@@ -41,6 +42,12 @@ public class MBNumberProperty : IMBProperty
     public MBNumberProperty SetDecimalPlaces(int decimalPlaces)
     {
         DecimalPlaces = decimalPlaces;
+        return this;
+    }
+
+    public MBNumberProperty SetOverrideValue(object value)
+    {
+        OverrideValue = value;
         return this;
     }
 }

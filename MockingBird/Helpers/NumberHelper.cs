@@ -13,22 +13,28 @@ namespace MockingBird.Helpers
 
         internal static object GetRandomNumber(MBNumberProperty property)
         {
-
-            switch (property.Format)
+            if (property.OverrideValue != null)
             {
-                case MBNumberFormat.Integer:
-                    return GetRandomInt(property.MinValue, property.MaxValue);
-                case MBNumberFormat.Decimal:
-                    return Math.Round(GetRandomDecimal(property.MinValue, property.MaxValue), property.DecimalPlaces);
-                case MBNumberFormat.Double:
-                    return Math.Round(GetRandomDouble(property.MinValue, property.MaxValue), property.DecimalPlaces);
-                case MBNumberFormat.Float:
-                    return Math.Round(GetRandomFloat(property.MinValue, property.MaxValue), property.DecimalPlaces);
-                case MBNumberFormat.Long:
-                    return GetRandomLong();                   
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }    
+                return property.OverrideValue;
+            }
+            else
+            {
+                switch (property.Format)
+                {
+                    case MBNumberFormat.Integer:
+                        return GetRandomInt(property.MinValue, property.MaxValue);
+                    case MBNumberFormat.Decimal:
+                        return Math.Round(GetRandomDecimal(property.MinValue, property.MaxValue), property.DecimalPlaces);
+                    case MBNumberFormat.Double:
+                        return Math.Round(GetRandomDouble(property.MinValue, property.MaxValue), property.DecimalPlaces);
+                    case MBNumberFormat.Float:
+                        return Math.Round(GetRandomFloat(property.MinValue, property.MaxValue), property.DecimalPlaces);
+                    case MBNumberFormat.Long:
+                        return GetRandomLong();
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
         internal static List<object> GetRandomNumberList(MBNumberProperty property)
@@ -78,8 +84,8 @@ namespace MockingBird.Helpers
             _random.NextBytes(buffer);
             return Math.Abs(BitConverter.ToInt64(buffer, 0));
         }
-        
-       internal static decimal GetRandomDecimal(decimal min = 0, decimal max = 1000)
+
+        internal static decimal GetRandomDecimal(decimal min = 0, decimal max = 1000)
         {
             if (min >= max)
             {
@@ -87,6 +93,6 @@ namespace MockingBird.Helpers
             }
             var next = (decimal)_random.NextDouble();
             return min + (next * (max - min));
-        }               
+        }
     }
 }
