@@ -1,20 +1,18 @@
-# MockingBird 
+# MockingBird 
 
-A powerful C# library to mock data for any object or record.  
+A powerful C# library to mock data for any object or record.    
 
-This project was created originally at BuildIT 2025 by Jason Thomas  
+# Getting Started  
 
-# Getting Started  
+## 1. Add A Reference to MockingBird
 
-## 1. Add A Reference to MockingBird
-
-## 2. Add Using Statement
+## 2. Add Using Statement
 
 ```
 using MockingBird;
 ```
 
-## 3. Define a MockingBird Object (MBObject) and Add Properties
+## 3. Define a MockingBird Object (MBObject) and Add Properties
 
 ```
 MBObject obj = new MBObject();
@@ -25,15 +23,15 @@ obj.AddProperty(new MBDateTimeProperty("DateOfBirth"));
 obj.AddProperty(new MBStringProperty("Email").SetFormat(MBStringFormat.Email));
 ```
 
-## 4. Call the MBObject's Mock() Method w/ How many records you want
+## 4. Call the MBObject's Mock() Method w/ How many records you want
 
 ```
 var sampleRecords = obj.Mock(numberOfRecords);
 ```
 
-# Supported Property Types  
+# Supported Property Types  
 
-## Number (MBNumberProperty)
+## Number (MBNumberProperty)
 
 ### Supported Types
 - Integer
@@ -42,14 +40,14 @@ var sampleRecords = obj.Mock(numberOfRecords);
 - Float
 - Long
 
-### Optional Properties
+### Optional Properties
 - IsList (Default = false)
 - MinValue (Default = 0)
 - MaxValue (Default = 1000)
 - Format (Default = Integer)
 - Decimal Places (Default = 2)
 
-### Usage Samples
+### Usage Samples
 
 ```
 new MBNumberProperty("Age"); // Basic Integer
@@ -61,7 +59,7 @@ new MBNumberProperty("Long").SetFormat(MBNumberFormat.Long); // Basic Long
 
 ```
 
-## String (MBStringProperty)
+## String (MBStringProperty)
 
 ### Supported Pre-Formatted Strings
 - Guid
@@ -81,7 +79,7 @@ new MBNumberProperty("Long").SetFormat(MBNumberFormat.Long); // Basic Long
 - CompanyName
 - Phone
 
-### Optional Properties
+### Optional Properties
 - IsList (Default = false)
 - Length (Default = 20)
 - IncludeSpecialCharacters (Default = false)
@@ -101,7 +99,7 @@ new MBStringProperty("String_SSN").SetFormat(MBStringFormat.SSN); // SSN
 new MBStringProperty("String_Notes").SetLength(1000).SetIncludeSpaces(true).SetIncludeDiacritics(true); //String w/ Length of 1000 including spaces and Diacritic chars mixed in
 ```
 
-## Boolean (MBBooleanProperty)
+## Boolean (MBBooleanProperty)
 
 ### Supported Pre-Formatted Strings
 - None (bool) (Default)
@@ -110,7 +108,7 @@ new MBStringProperty("String_Notes").SetLength(1000).SetIncludeSpaces(true).SetI
 - YN (String)
 - OneZero (bit)
 
-### Optional Properties
+### Optional Properties
 - IsList (Default = false)
 - TruePercentage (Default = 50)
 - Format (Default = None)
@@ -122,7 +120,7 @@ new MBBooleanProperty("BoolList", true); // List of Bool
 new MBBooleanProperty("String_Bool_YesNo").SetFormat(MBBooleanFormat.YesNo); // ("Yes" / "No")
 ```
 
-## DateTime (MBDateTimeProperty)
+## DateTime (MBDateTimeProperty)
 
 ### Supported Pre-Formatted Strings
 - None (DateTime)(Default)
@@ -136,7 +134,7 @@ new MBBooleanProperty("String_Bool_YesNo").SetFormat(MBBooleanFormat.YesNo); // 
 - UniversalSortableDateTime (String)
 - YearMonth (String)
 
-### Optional Properties
+### Optional Properties
 - IsList (Default = false)
 - MinValue (Default = -1 Year)
 - MaxValue (Default = Now)
@@ -152,10 +150,10 @@ new MBDateTimeProperty("Date_CustomRange").SetMinValue(DateTime.Now.AddYears(-3)
 new MBDateTimeProperty("Date_CustomStringFormat").SetFormat(MBDateTimeFormat.CustomStringFormat).SetCustomFormatString("yyyy-MM-dd HH:mm:ss"); //Custom Formatted Date String
 ```
 
-## MBObjects (Objects)
+## MBObjects (Objects)
 You can create complex objects by using an Property Type of "MBObjectProperty" 
 
-### Optional Properties
+### Optional Properties
 - IsList (Default = false)
 
 ## Usage Samples
